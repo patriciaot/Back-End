@@ -1,20 +1,12 @@
 package org.generation.Colibri.model;
 
-@Entity
-@Table(name="Usuarios")
 public class Usuarios {
 	
-	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	@Column(unique=true, nullable=false)
-	private Long id;
-	@Column(nullable=false)
+	
+	private Long id;)
 	private String nombre;
-	@Column(nullable=false)
 	private String correo;
-	@Column(nullable=false)
 	private String telefono;
-	@Column(nullable=false)
 	private String contraseña;
 		
 	public Usuarios(Long id, String nombre, String correo, String telefono, String contraseña) {

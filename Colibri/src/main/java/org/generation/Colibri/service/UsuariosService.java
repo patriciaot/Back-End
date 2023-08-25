@@ -31,42 +31,42 @@ public class UsuariosService {
 	}//getUsuarios
 
 	public Usuarios deleteUsuarios(Long id) {
-		Usuarios tmpUser=null;
+		Usuarios tmp=null;
     	if (usuariosRepository.existsById(id)) {
-			tmpUser=usuariosRepository.findById(id).get();
+			tmp=usuariosRepository.findById(id).get();
 			usuariosRepository.deleteById(id);
 		}//if
-		return tmpUser;
+		return tmp;
 	}//deleteUsuarios
 
 	public Usuarios addUsuarios(Usuarios usuarios) {
-		Usuarios tmpUser=null;
+		Usuarios tmp=null;
 		if(usuariosRepository.findByCorreo(usuarios.getCorreo()).isEmpty()) {
 			
 			usuarios.setContrasena(passwordEncoder.encode(usuarios.getContrasena()));
 			
-			tmpUser = usuariosRepository.save(usuarios);
+			tmp= usuariosRepository.save(usuarios);
 		}//if
 		return tmpUser;
 	}//addUsuarios
 
-	public Usuarios updateUsuarios(Long id, String nombre, String telefono, Double correo, Double contraseña, Cambiocontraseña cambiocontraseña) {
-		Usuarios tmpUser = null;
+	public Usuarios updateUsuarios(Long id, String nombre, String telefono, Double correo, Double contraseña, Cambiocontrasena cambiocontraseña) {
+		Usuarios tmp= null;
 		if (usuariosRepository.existsById(id)) { // busca si existe
-			if ( (cambioContraseña.getContraseña() !=null) && (cambioContraseña.getNewContrasena() !=null) ) { //passwords !null
-				tmpUser=usuariosRepository.findById(id).get();
+			if ( (cambioContrasena.getContraseña() !=null) && (cambioContrasena.getNewContrasena() !=null) ) { //passwords !null
+				tmp=uariosRepository.findById(id).get();
 				
-				if(passwordEncoder.matches(cambioContraseña.getContraseña(), tmpUser.getContraseña())) {//verifica si es igual
-					tmpUser.setContrasena(passwordEncoder.encode(cambioContraseña.getNewContrasena()));
+				if(passwordEncoder.matches(cambioContraseña.getContraseña(), tmp.getContraseña())) {//verifica si es igual
+					tmp.setContrasena(passwordEncoder.encode(cambioContrasena.getNewContrasena()));
 					usuariosRepository.save(tmpUser);
 				}else {
-					tmpUser=null;
+					tmp=null;
 				}//if equals
 			}// !null
 		}else {
 			System.out.println("Update - El usuario con id " + id + " no existe." );
 		}//else
-		return tmpUser;
+		return tmp;
 	}//updateUsuarios
 	
 	public boolean validateUsuario(Usuarios usuario) {
@@ -74,7 +74,7 @@ public class UsuariosService {
 		if (userByEmail.isPresent()) {
 			Usuarios user = userByEmail.get();
 			
-			if (passwordEncoder.matches(usuario.getContraseña(), user.getContraseña())) {
+			if (passwordEncoder.matches(usuario.getContrasena(), user.getContrasena())) {
 //			if (user.getPassword().equals(usuario.getPassword())) {
 				return true;
 			} // if equals

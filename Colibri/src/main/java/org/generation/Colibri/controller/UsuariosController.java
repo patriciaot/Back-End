@@ -47,16 +47,7 @@ public class UsuariosController {
 			return usuariosService.addUsuarios(usuarios);
 		}//addUser
 		
-		//   DTO  DATA Transfer Object	
-		@PutMapping(path="{userId}")
-		public Usuarios updateUsuarios(@PathVariable("userId") Long id,
-				@RequestParam(required=false)  String nombre,
-				@RequestParam(required=false)  String telefono,
-				@RequestParam(required=false)  Double correo,
-				@RequestParam(required=false)  Double contraseña) {
-			return usuariosService.updateUsuarios(id, nombre, telefono, correo, contraseña);
-		}//updateUser
-		
+	
 	
 	
 }//UsuariosController
