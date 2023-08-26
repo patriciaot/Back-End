@@ -17,9 +17,7 @@ public class Usuarios {
 	private Long id;
 	@Column(nullable=false)
 	private String nombre;
-	@Column(nullable=false)
 	private String correo;
-	@Column(nullable=false)
 	private String telefono;
 	@Column(nullable=false)
 	private String contrasena;
