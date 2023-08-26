@@ -3,7 +3,9 @@ package org.generation.Colibri.service;
 
 import java.util.List;
 
+import org.generation.Colibri.model.ChangeContrasena;
 import org.generation.Colibri.model.Usuarios;
+import org.generation.Colibri.repository.UsuariosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +14,10 @@ public class UsuariosService {
 	
     private final UsuariosRepository usuariosRepository;
     
-    @Autowired
-	private PasswordEncoder passwordEncoder;
+   
 
     @Autowired
-    public UsuariosServices(UsuariosRepository usuariosRepository) {
+    public UsuariosService(UsuariosRepository usuariosRepository) {
     	this.usuariosRepository = usuariosRepository;
     }//constructor
 
@@ -31,56 +32,43 @@ public class UsuariosService {
 	}//getUsuarios
 
 	public Usuarios deleteUsuarios(Long id) {
-		Usuarios tmpUser=null;
+		Usuarios tmp = null;
     	if (usuariosRepository.existsById(id)) {
-			tmpUser=usuariosRepository.findById(id).get();
+    		tmp = usuariosRepository.findById(id).get();
 			usuariosRepository.deleteById(id);
 		}//if
-		return tmpUser;
+		return tmp;
 	}//deleteUsuarios
 
 	public Usuarios addUsuarios(Usuarios usuarios) {
-		Usuarios tmpUser=null;
-		if(usuariosRepository.findByCorreo(usuarios.getCorreo()).isEmpty()) {
-			
-			usuarios.setContrasena(passwordEncoder.encode(usuarios.getContrasena()));
-			
-			tmpUser = usuariosRepository.save(usuarios);
-		}//if
-		return tmpUser;
+		Usuarios tmp=null;
+		if(usuariosRepository.findByEmail(usuarios.getCorreo()).isEmpty()) {
+		tmp = usuariosRepository.save(usuarios);
+		} else {
+			System.out.println("El usuario con el email ["
+					+ usuarios.getCorreo() + "] ya está registrado");
+		}
+		return tmp;
 	}//addUsuarios
 
-	public Usuarios updateUsuarios(Long id, String nombre, String telefono, Double correo, Double contraseña, Cambiocontraseña cambiocontraseña) {
-		Usuarios tmpUser = null;
-		if (usuariosRepository.existsById(id)) { // busca si existe
-			if ( (cambioContraseña.getContraseña() !=null) && (cambioContraseña.getNewContrasena() !=null) ) { //passwords !null
-				tmpUser=usuariosRepository.findById(id).get();
-				
-				if(passwordEncoder.matches(cambioContraseña.getContraseña(), tmpUser.getContraseña())) {//verifica si es igual
-					tmpUser.setContrasena(passwordEncoder.encode(cambioContraseña.getNewContrasena()));
-					usuariosRepository.save(tmpUser);
-				}else {
-					tmpUser=null;
-				}//if equals
-			}// !null
-		}else {
-			System.out.println("Update - El usuario con id " + id + " no existe." );
-		}//else
-		return tmpUser;
-	}//updateUsuarios
+	public Usuarios updateUsuarios (Long id, ChangeContrasena changeContrasena) {
+		Usuarios tmp = null; 
+		if(usuariosRepository.existsById(id)) {
+			tmp=usuariosRepository.findById(id).get();
+			if (changeContrasena.getContrasena()!=null && changeContrasena.getContrasena()!=null) {
+				if (tmp.getContrasena().equals(changeContrasena.getContrasena())) {
+					tmp.setContrasena(changeContrasena.getNuevaContrasena()); //cambiamos contraseñas
+					usuariosRepository.save(tmp);				
+				} else {
+					tmp = null;		
+				}//else //if password			
+			}//if !=null			
+		} else {
+			System.out.println("Update - El producto con el id ["
+					+ id +"] no existe");			
+		}//else //if
+		return tmp;
+	}//updateUsuario
 	
-	public boolean validateUsuario(Usuarios usuario) {
-		Optional<Usuarios> userByEmail = usuariosRepository.findByCorreo(usuario.getCorreo());
-		if (userByEmail.isPresent()) {
-			Usuarios user = userByEmail.get();
-			
-			if (passwordEncoder.matches(usuario.getContraseña(), user.getContraseña())) {
-//			if (user.getPassword().equals(usuario.getPassword())) {
-				return true;
-			} // if equals
-		} // if isPresent
-		return false;
-	}// validateUsuario
-    
 
 }//UsuariosService

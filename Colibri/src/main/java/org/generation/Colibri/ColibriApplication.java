@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ColibriApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ColibriApplication.class, args);
+		SpringApplication.run(ColibriApplication.class, args); //escaneaa la aplicacion y la ejecuta
+	
+
 	}//main
 
 }//Colibri

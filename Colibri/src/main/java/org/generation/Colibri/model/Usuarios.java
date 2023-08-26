@@ -1,12 +1,19 @@
 package org.generation.Colibri.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Entity
 @Table(name="Usuarios")
 public class Usuarios {
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	@Column(unique=true, nullable=false)
+	@Column(name="id", unique=true, nullable=false)
 	private Long id;
 	@Column(nullable=false)
 	private String nombre;
@@ -15,26 +22,17 @@ public class Usuarios {
 	@Column(nullable=false)
 	private String telefono;
 	@Column(nullable=false)
-	private String contraseña;
+	private String contrasena;
+	
+	public Usuarios() { }//constructor
+	public Usuarios(String nombre, String correo, String telefono, String contrasena) {
 		
-	public Usuarios(Long id, String nombre, String correo, String telefono, String contraseña) {
-		super();
-		this.id = id;
 		this.nombre = nombre;
 		this.correo = correo;
 		this.telefono = telefono;
-		this.contraseña = contraseña;
+		this.contrasena = contrasena;
 	}//constructor
 	
-	public Usuarios() {}//constructor
-	
-	public Long getId() {
-		return id;
-	}//getId
-
-	public void setId(Long id) {
-		this.id = id;
-	}//setId
 
 	public String getNombre() {
 		return nombre;
@@ -60,18 +58,26 @@ public class Usuarios {
 		this.telefono = telefono;
 	}//setTelefono
 
-	public String getContraseña() {
-		return contraseña;
+	public String getContrasena() {
+		return contrasena;
 	}//getContraseña
+	
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}//setContraseña
+	
+	
+	
+	public Long getId() {
+		return id;
+	}//getId
+
 
 	@Override
 	public String toString() {
 		return "Usuarios [id=" + id + ", nombre=" + nombre + ", correo=" + correo + ", telefono=" + telefono
-				+ ", contraseña=" + contraseña + "]";
-	}
+				+ ", contrasena=" + contrasena + "]";
+	}//toString
 		
 }//Usuarios
