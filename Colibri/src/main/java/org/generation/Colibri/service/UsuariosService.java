@@ -39,7 +39,7 @@ public class UsuariosService {
 
 	public Usuarios addUsuarios(Usuarios usuarios) {
 		Usuarios tmp=null;
-		if(usuariosRepository.findByEmail(usuarios.getCorreo()).isEmpty()) {
+		if(usuariosRepository.findByCorreo(usuarios.getCorreo()).isEmpty()) {
 		tmp = usuariosRepository.save(usuarios);
 		} else {
 			System.out.println("El usuario con el correo ["
