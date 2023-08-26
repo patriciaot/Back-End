@@ -1,6 +1,5 @@
 package org.generation.Colibri.service;
 
-
 import java.util.List;
 
 import org.generation.Colibri.model.ChangeContrasena;
@@ -11,10 +10,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UsuariosService {
-	
+
     private final UsuariosRepository usuariosRepository;
-    
-   
 
     @Autowired
     public UsuariosService(UsuariosRepository usuariosRepository) {
@@ -45,7 +42,7 @@ public class UsuariosService {
 		if(usuariosRepository.findByEmail(usuarios.getCorreo()).isEmpty()) {
 		tmp = usuariosRepository.save(usuarios);
 		} else {
-			System.out.println("El usuario con el email ["
+			System.out.println("El usuario con el correo ["
 					+ usuarios.getCorreo() + "] ya está registrado");
 		}
 		return tmp;
@@ -55,16 +52,16 @@ public class UsuariosService {
 		Usuarios tmp = null; 
 		if(usuariosRepository.existsById(id)) {
 			tmp=usuariosRepository.findById(id).get();
-			if (changeContrasena.getContrasena()!=null && changeContrasena.getContrasena()!=null) {
+			if (changeContrasena.getContrasena()!=null && changeContrasena.getNuevaContrasena()!=null) {
 				if (tmp.getContrasena().equals(changeContrasena.getContrasena())) {
-					tmp.setContrasena(changeContrasena.getNuevaContrasena()); //cambiamos contraseñas
+					tmp.setContrasena(changeContrasena.getNuevaContrasena()); 
 					usuariosRepository.save(tmp);				
 				} else {
 					tmp = null;		
 				}//else //if password			
 			}//if !=null			
 		} else {
-			System.out.println("Update - El producto con el id ["
+			System.out.println("Update - El usuario con el id ["
 					+ id +"] no existe");			
 		}//else //if
 		return tmp;

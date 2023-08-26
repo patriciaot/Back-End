@@ -1,47 +1,57 @@
 package org.generation.Colibri.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table (name="administrador")
 public class Administrador {
+	
+	@Id
+	@GeneratedValue (strategy=GenerationType.IDENTITY)
+	@Column (name="id", unique=true, nullable=false)
 	private Long id;
+	@Column(nullable=false)
 	private String correo;
-	private String contraseña;
+	@Column(nullable=false)
+	private String contrasena;
 	
-	public Administrador(Long id, String correo, String contraseña) {
-		super();
-		this.id = id;
+	public Administrador() {  }
+
+	public Administrador(String correo, String contrasena) {
 		this.correo = correo;
-		this.contraseña = contraseña;
-	}//constructor
-	
+		this.contrasena = contrasena;
+	}
 
-	public Long getId() {
-		return id;
-	}//getId
-
-	public void setId(Long id) {
-		this.id = id;
-	}//setId
 
 	public String getCorreo() {
 		return correo;
-	}//getCorreo
+	}
 
 	public void setCorreo(String correo) {
 		this.correo = correo;
-	}//setCorreo
+	}
 
-	public String getContraseña() {
-		return contraseña;
-	}//getContraseña
+	public String getContrasena() {
+		return contrasena;
+	}
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
-	}//setContraseña
-
-
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	
 	@Override
 	public String toString() {
-		return "Administrador [id=" + id + ", correo=" + correo + ", contraseña=" + contraseña + "]";
+		return "Administracion [id=" + id + ", correo=" + correo + ", contrasena=" + contrasena + "]";
 	}
-}//Administrador
+	
+}
 

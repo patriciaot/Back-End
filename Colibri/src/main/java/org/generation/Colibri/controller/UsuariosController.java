@@ -5,8 +5,7 @@ import java.util.List;
 import org.generation.Colibri.model.ChangeContrasena;
 import org.generation.Colibri.model.Usuarios;
 import org.generation.Colibri.service.UsuariosService;
-import org.generation.ecommerce.model.ChangePassword;
-import org.generation.ecommerce.model.Usuario;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -53,11 +52,8 @@ public class UsuariosController {
 		//   DTO  DATA Transfer Object	
 		@PutMapping(path="{userId}")
 		public Usuarios updateUsuarios(@PathVariable("userId") Long id,
-				@RequestParam(required=false)  String nombre,
-				@RequestParam(required=false)  String telefono,
-				@RequestParam(required=false)  Double correo,
-				@RequestParam(required=false)  Double contraseña) {
-			return usuariosService.updateUsuarios(id, nombre, telefono, correo, contraseña);
+				@RequestBody ChangeContrasena changeContrasena) {
+			return usuariosService.updateUsuarios(id, changeContrasena);
 		}//updateUser
 		
 	
