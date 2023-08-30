@@ -49,13 +49,13 @@ public class ProductosController {
 	
 	@PutMapping(path="{prodId}")
 	public Productos updateProduct(@PathVariable("prodId") Long id,
-			@RequestParam(required=false) String nombre,
+			@RequestParam(required=false) String name,
 			@RequestParam(required=false)  String descripcion,
 			@RequestParam(required=false)  Double precio,
 			@RequestParam(required=false)  Integer cantidad,
 			@RequestParam(required=false)  String categoria,
-			@RequestParam(required=false)  String imagen) {
-		return productosService.updateProductos(id, nombre, descripcion, precio, cantidad, categoria, imagen);
+			@RequestParam(required=false)  String img) {
+		return productosService.updateProductos(id, name, descripcion, precio, cantidad, categoria, img);
 	}//updateProduct
 	
 	

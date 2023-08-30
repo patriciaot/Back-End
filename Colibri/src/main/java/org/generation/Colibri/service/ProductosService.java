@@ -33,11 +33,11 @@ public class ProductosService {
 
 	public Productos addProductos(Productos productos) {
 		Productos tmp=null;
-		if(productosRepository.findByNombre(productos.getNombre()).isEmpty()) {
+		if(productosRepository.findByName(productos.getName()).isEmpty()) {
 			tmp = productosRepository.save(productos);	
 		} else {
 			System.out.println("Ya existe el producto con el nombre ["
-					+ productos.getNombre()+"]");
+					+ productos.getName()+"]");
 		}//else 
 		return tmp;
 	}//Método addProductos
@@ -52,18 +52,18 @@ public class ProductosService {
 	} //Método deleteProductos
 
 
-	public Productos updateProductos(Long id, String nombre, String descripcion, Double precio, Integer cantidad,
-			String categoria, String imagen) {
+	public Productos updateProductos(Long id, String name, String descripcion, Double precio, Integer cantidad,
+			String categoria, String img) {
 		Productos tmp=null;
 		
 			if(productosRepository.existsById(id)) {
 				tmp = productosRepository.findById(id).get();
-				if(nombre!=null) tmp.setNombre(nombre);
+				if(name!=null) tmp.setNombre(name);
 				if(descripcion!=null)tmp.setDescripcion(descripcion);
 		        if(precio!=null) tmp.setPrecio(precio);
 		        if(cantidad!=null)tmp.setCantidad(cantidad);
 		        if(categoria!=null) tmp.setCategoria(categoria);
-		        if(imagen!=null)tmp.setImagen(imagen);
+		        if(img!=null)tmp.setImagen(img);
 		        productosRepository.save(tmp);
 		        
 				

@@ -16,36 +16,36 @@ public class Productos {
 	@Column (name= "id", unique=true, nullable=false)//las anotaciones solo afectan a la siguiente linea de codigo que tenemos es decir estas 3 afectan a Long Id 
 	private Long id;
 	@Column(nullable=false)
-	private String nombre;
+	private String name;
 	private String descripcion;
 	private Double precio;
 	private Integer cantidad;
 	private String categoria; 
 	@Column(nullable=false)
-	private String imagen;
+	private String img;
 
 	
-public Productos( String nombre, String descripcion, Double precio, Integer cantidad, String categoria,
-		String imagen) {
+public Productos( String name, String descripcion, Double precio, Integer cantidad, String categoria,
+		String img) {
 	
-	this.nombre = nombre;
+	this.name = name;
 	this.descripcion = descripcion;
 	this.precio = precio;
 	this.cantidad = cantidad;
 	this.categoria = categoria;
-	this.imagen = imagen;
+	this.img = img;
 
 }//constructor
 
 	public Productos() { }//constructor vacío
 	
 	
-	public String getNombre() {
-		return nombre;
+	public String getName() {
+		return name;
 	}//getNombre
 	
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombre(String name) {
+		this.name = name;
 	}//setNombre
 	
 	public String getDescripcion() {
@@ -80,19 +80,19 @@ public Productos( String nombre, String descripcion, Double precio, Integer cant
 	 this.categoria=categoria;
 	}//setCategoria
 	
-	public String getImagen() {
-		return imagen;
+	public String getImg() {
+		return img;
 	}//getImage
 	
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
+	public void setImagen(String img) {
+		this.img = img;
 	}//setImage
 	
 	
 	@Override
 	public String toString() {
-		return "Productos [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio
-				+ ", cantidad=" + cantidad + ", categoria=" + categoria + ", imagen=" + imagen + "]";
+		return "Productos [id=" + id + ", name=" + name + ", descripcion=" + descripcion + ", precio=" + precio
+				+ ", cantidad=" + cantidad + ", categoria=" + categoria + ", img=" + img + "]";
 	}//to String
 	
 	
